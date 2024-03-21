@@ -1,0 +1,5 @@
+{
+    "nbody_solve": [1],
+    "calculate_forces_block": [0, 0, 1, 1, 1, 2 , 2, 2],
+    "update_particles_block": [1]
+}

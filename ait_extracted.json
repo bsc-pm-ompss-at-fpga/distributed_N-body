@@ -1,0 +1,41 @@
+[
+{
+    "full_path" : "hls/nbody_solve.cpp",
+    "filename" : "nbody_solve.cpp",
+    "name" : "nbody_solve",
+    "type" : 8409353939,
+    "num_instances" : 1,
+    "task_creation" : true,
+    "instrumentation" : false,
+    "periodic" : false,
+    "lock" : false,
+    "deps" : true,
+    "ompif" : true
+},
+{
+    "full_path" : "hls/calc_forces.cpp",
+    "filename" : "calc_forces.cpp",
+    "name" : "calc_forces",
+    "type" : 4294967297,
+    "num_instances" : 1,
+    "task_creation" : false,
+    "instrumentation" : false,
+    "periodic" : false,
+    "lock" : false,
+    "deps" : false,
+    "ompif" : false
+},
+{
+    "full_path" : "hls/update_particles.cpp",
+    "filename" : "update_particles.cpp",
+    "name" : "update_particles",
+    "type" : 4294967298,
+    "num_instances" : 1,
+    "task_creation" : false,
+    "instrumentation" : false,
+    "periodic" : false,
+    "lock" : false,
+    "deps" : false,
+    "ompif" : false
+}
+]

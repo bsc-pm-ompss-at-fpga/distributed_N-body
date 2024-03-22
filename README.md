@@ -51,3 +51,9 @@ We need to do this because even if every rank only calculates a subset of the fo
 
 This image shows the same scenario in the previous section but distributing one block on a different rank with IMP.
 We can see how after the particle update of the owned block, each rank sends its part to the others.
+
+The OMPIF broadcast is slighlty different from the regular MPI counterpart.
+It is a task that sends the same data to the rest of the cluster, but doesn't have a implicit barrier and must be executed only by the sender rank.
+These are the green tasks of the image.
+The other ranks must execute the corresponding OMPIF_Recv, which are the red tasks in the image.
+However, this is taken care by the `mcxx_create_task` wrapper, and it is not visible by the user.

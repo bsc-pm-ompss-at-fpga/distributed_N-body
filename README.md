@@ -47,4 +47,7 @@ This means the block is owned by everyone, so after the task finshes on the owne
 By doing this, after every step all ranks broadcast the particle block they updated.
 We need to do this because even if every rank only calculates a subset of the forces, they need to read all the particles.
 
+![nbody_imp_proc](https://github.com/bsc-pm-ompss-at-fpga/distributed_N-body/assets/17345627/00c9156d-6e57-420d-b856-17f0a8b641fb)
 
+This image shows the same scenario in the previous section but distributing one block on a different rank with IMP.
+We can see how after the particle update of the owned block, each rank sends its part to the others.

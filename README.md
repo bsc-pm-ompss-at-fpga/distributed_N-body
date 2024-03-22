@@ -57,3 +57,24 @@ It is a task that sends the same data to the rest of the cluster, but doesn't ha
 These are the green tasks of the image.
 The other ranks must execute the corresponding OMPIF_Recv, which are the red tasks in the image.
 However, this is taken care by the `mcxx_create_task` wrapper, and it is not visible by the user.
+
+## How to compile
+
+Sadly, there is no official support in the clang compiler for OMPIF and IMP, so we have to split manually the FPGA and the host part.
+The host code is under `src`.
+You will see an implementation of the `calculate_forces` and `update_particles` tasks, but that code is not actually used, it is there because the compiler for the host app still needs an implementation for those funcions.
+In execution time, the code will search for the FPGA accelerators, which are implemented in the hls under the `hls` directory.
+
+So, first you need an OmpSs@FPGA installation with broadcaster support for both in Nanos6 and clang.
+Also, you need the AIT version that implements Ethernet subsystem and OMPIF support.
+For the moment these versions are not official nor public, you can ask for access to ompss-fpga-support@bsc.es.
+
+In summary, to compile the host executable run `make`
+To generate the bitstream run `make ait`
+
+There are some important variables in the Makefile:
+- FPGA_CLOCK: frequency in MHz at which the accelerators will run.
+- FPGA_MEMORY_PORT_WIDTH: Data bit-width of the memory port for all the accelerators. More bit-width may provide more bandwidth (depending on the FPGA memory path), at the cost of more resource usage.
+- NBODY_BLOCK_SIZE: The number of elements assigned to a block. This determines the execution time of the accelerators, as well as the size of the accelerator internal memory.
+- NBODY_NCALCFORCES: The number of forces calculated per cycle. The main loop of the force calculation is pipelined with II=1 and unrolled with a factor determined by this variable. The more parallel forces the more performance, but this greatly increases resource usage, specially DSPs, and also increases the number of ports of the internal memories.
+- NBODY_NUM_FBLOCK_ACCS: Number of calculate forces block accelerators. Since this part is much more computationally expensive than the particle update, it is the only accelerator that we replicate. There is only 1 instance of the update accelerator.

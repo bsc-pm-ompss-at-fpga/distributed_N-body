@@ -63,9 +63,9 @@ static void update_particles_block_moved(float particles[16384L], float forces[6
       const float velocity_change_x = forces[FORCE_FPGABLOCK_X_OFFSET + e] * time_by_mass;
       const float velocity_change_y = forces[FORCE_FPGABLOCK_Y_OFFSET + e] * time_by_mass;
       const float velocity_change_z = forces[FORCE_FPGABLOCK_Z_OFFSET + e] * time_by_mass;
-      const float position_change_x = velocity_x + velocity_change_x * half_time_interval;
-      const float position_change_y = velocity_y + velocity_change_y * half_time_interval;
-      const float position_change_z = velocity_z + velocity_change_z * half_time_interval;
+      const float position_change_x = velocity_x * time_interval + velocity_change_x * half_time_interval;
+      const float position_change_y = velocity_y * time_interval + velocity_change_y * half_time_interval;
+      const float position_change_z = velocity_z * time_interval + velocity_change_z * half_time_interval;
       particles[PARTICLES_FPGABLOCK_VEL_X_OFFSET + e] = velocity_x + velocity_change_x;
       particles[PARTICLES_FPGABLOCK_VEL_Y_OFFSET + e] = velocity_y + velocity_change_y;
       particles[PARTICLES_FPGABLOCK_VEL_Z_OFFSET + e] = velocity_z + velocity_change_z;
